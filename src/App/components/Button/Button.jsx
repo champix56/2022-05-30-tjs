@@ -4,9 +4,13 @@ import style from "./Button.module.css";
 function Button(props) {
   return (
     <button
-      className={style.Button+(props.className?' '+props.className:'')}
+      className={style.Button + (props.className ? " " + props.className : "")}
       type={props.type}
-      style={{...props.style, backgroundColor: props.bgColor, color: props.color }}
+      style={{
+        ...props.style,
+        backgroundColor: props.bgColor,
+        color: props.color,
+      }}
     >
       {props.children}
     </button>
@@ -18,7 +22,7 @@ Button.propTypes = {
   children: PropTypes.any.isRequired,
   bgColor: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  className : PropTypes.string,
+  className: PropTypes.string,
   style: PropTypes.object,
 };
 
@@ -29,13 +33,8 @@ Button.defaultProps = {
 };
 export default Button;
 export function DefaultButton(props) {
-    return (
-      <Button {...props} bgColor='skyblue'></Button>
-    )
-  } 
-  export function WarningButton(props) {
-      return (
-        <Button {...props} bgColor='tomato'></Button>
-      )
-    } 
-  
+  return <Button {...props} bgColor="skyblue"></Button>;
+}
+export function WarningButton(props) {
+  return <Button {...props} bgColor="tomato"></Button>;
+}
