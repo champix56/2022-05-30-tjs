@@ -6,7 +6,7 @@ function Button(props) {
     <button
       className={style.Button+(props.className?' '+props.className:'')}
       type={props.type}
-      style={{ backgroundColor: props.bgColor, color: props.color }}
+      style={{...props.style, backgroundColor: props.bgColor, color: props.color }}
     >
       {props.children}
     </button>
@@ -18,7 +18,8 @@ Button.propTypes = {
   children: PropTypes.any.isRequired,
   bgColor: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  className : PropTypes.string
+  className : PropTypes.string,
+  style: PropTypes.object,
 };
 
 Button.defaultProps = {
