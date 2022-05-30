@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
-const buttonContent = "Hello";
+import ButtonStyle from "./components/Button/Button.module.css";
+
 function App() {
   //comment js
   /*comment multilignes js*/
@@ -18,7 +19,7 @@ function App() {
       >Hello</Button>
       <Button ><div>Hello</div></Button>
       <Button bgColor="tomato" color="blue" >hello<hr/>De lu</Button>
-      <Button >With child</Button>
+      <Button className={ButtonStyle.underline}>With child</Button>
     </div>
   );
 }
