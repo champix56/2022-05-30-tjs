@@ -1,6 +1,6 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button/Button';
 
 function App() {
   //comment js
@@ -9,6 +9,11 @@ function App() {
     <div className="App">
       {/*comment dans XML*/}
       DEMAT BREIZH
+      <hr/>
+      <Button/>
+      <Button/>
+      <Button/>
+      <Button/>
     </div>
   );
 }
