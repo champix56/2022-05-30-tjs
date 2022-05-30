@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import style from "./Button.module.css";
 function Button(props) {
   const [isClicked, setisClicked] = useState(false);
+  useEffect(() => {
+   if(isClicked){
+      setTimeout( ()=>{setisClicked(false);}, 230);
+   }
+  }, [isClicked]);
   return (
     <button
       className={`${style.Button}${props.className ? " " + props.className : ""}${isClicked ? " " + style.clicked : ""}`}
