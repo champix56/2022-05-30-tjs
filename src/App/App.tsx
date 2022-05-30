@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import Button from './components/Button/Button';
-
+import React from "react";
+import "./App.css";
+import Button from "./components/Button/Button";
+const buttonContent = "Hello";
 function App() {
   //comment js
   /*comment multilignes js*/
@@ -9,11 +9,16 @@ function App() {
     <div className="App">
       {/*comment dans XML*/}
       DEMAT BREIZH
-      <hr/>
-      <Button/>
-      <Button/>
-      <Button/>
-      <Button/>
+      <hr />
+      <Button
+        action={() => {
+          alert("Le button est clické");
+        }}
+        type="button"
+      >Hello</Button>
+      <Button ><div>Hello</div></Button>
+      <Button >hello<hr/>De lu</Button>
+      <Button />
     </div>
   );
 }
