@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Button from "./components/Button/Button";
+import Button, { DefaultButton, WarningButton } from "./components/Button/Button";
 import ButtonStyle from "./components/Button/Button.module.css";
 
 function App() {
@@ -17,8 +17,8 @@ function App() {
         }}
         type="button"
       >Hello</Button>
-      <Button style={{fontWeight:900,fontSize:'x-large'}} ><div>Hello</div></Button>
-      <Button bgColor="tomato" color="blue" >hello<hr/>De lu</Button>
+      <WarningButton style={{fontWeight:900,fontSize:'x-large'}} ><div>Hello</div></WarningButton>
+      <DefaultButton bgColor="tomato" color="blue" >hello<hr/>De lu</DefaultButton>
       <Button className={ButtonStyle.underline}>With child</Button>
     </div>
   );

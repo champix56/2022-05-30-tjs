@@ -28,3 +28,14 @@ Button.defaultProps = {
   color: "white",
 };
 export default Button;
+export function DefaultButton(props) {
+    return (
+      <Button {...props} bgColor='skyblue'></Button>
+    )
+  } 
+  export function WarningButton(props) {
+      return (
+        <Button {...props} bgColor='tomato'></Button>
+      )
+    } 
+  
