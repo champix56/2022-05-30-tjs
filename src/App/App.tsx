@@ -1,37 +1,32 @@
+import { emptyMeme, ImageInterface, MemeInterface, MemeSVGViewer } from "orsys-tjs-meme";
+
 import React from "react";
-import Button from "./components/Button/Button";
-interface IAppState{
-  message?:'hello'|'goodbye',
-  counter:number,
+import FlexLayout from "./components/layout/FlexLayout/FlexLayout";
+import Footer from "./components/ui/Footer/Footer";
+import Header from "./components/ui/Header/Header";
+import MemeForm from "./components/ui/MemeForm/MemeForm";
+import Navbar from "./components/ui/Navbar/Navbar";
+interface IAppState {
+  currentMeme: MemeInterface;
+  images: Array<ImageInterface>;
 }
-interface IAppProps{}
+interface IAppProps {}
 
-class App extends React.Component<IAppProps,IAppState> {
-
-  constructor(props:IAppProps){
+class App extends React.Component<IAppProps, IAppState> {
+  constructor(props: IAppProps) {
     super(props);
-    this.state={message:'hello',counter:0}
-  }
-  componentDidMount(){
-    console.log('Composant app monté');
-  }
-  componentDidUpdate(prevProps:IAppProps,prevState:IAppState){
-    console.log('state post update=>',prevState,this.state);
-    console.log('props post update=>',prevProps,this.props);    
+    this.state = { currentMeme: emptyMeme, images: [] };
   }
   render() {
     return (
-      <div className="App" style={{ textAlign: "center" }}>
-        Valeur du compteur : {this.state.counter}
-        <hr />
-        <Button action={()=>{
-          this.setState({counter:this.state.counter-1})
-          console.log(this.state.counter)
-        }} bgColor="tomato">decrem -1</Button>
-        <Button action={()=>{
-          this.setState({counter:this.state.counter+1})
-          console.log(this.state.counter)
-        }} bgColor="skyblue">increm +1</Button>
+      <div className="App" data-testid="App">
+        <Header />
+        <Navbar />
+        <FlexLayout>
+          <MemeSVGViewer image={undefined} meme={this.state.currentMeme} />
+          <MemeForm />
+        </FlexLayout>
+        <Footer />
       </div>
     );
   }
