@@ -4,22 +4,29 @@ import style from "./Button.module.css";
 function Button(props) {
   const [isClicked, setisClicked] = useState(false);
   useEffect(() => {
-   if(isClicked){
-      setTimeout( ()=>{setisClicked(false);}, 230);
-   }
+    if (isClicked) {
+      setTimeout(() => {
+        setisClicked(false);
+      }, 230);
+    }
   }, [isClicked]);
   return (
     <button
-      className={`${style.Button}${props.className ? " " + props.className : ""}${isClicked ? " " + style.clicked : ""}`}
+      className={`${style.Button}${
+        props.className ? " " + props.className : ""
+      }${isClicked ? " " + style.clicked : ""}`}
       type={props.type}
       style={{
         ...props.style,
         backgroundColor: props.bgColor,
         color: props.color,
       }}
-      onClick={(evt)=>{
+      onClick={(evt) => {
         setisClicked(true);
-        console.log("isClicked :",isClicked);
+        console.log("isClicked :", isClicked);
+        if (props.action && typeof props.action==='function') {
+          props.action();
+        }
       }}
     >
       {props.children}
