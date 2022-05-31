@@ -1,1 +1,7 @@
-.FlexLayout {}
+.FlexLayout {
+    display: flex;
+    height:calc( 90vh - 65px)
+}
+.FlexLayout>*:first-child{
+    flex-grow:1;
+}
