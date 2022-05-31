@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import style from "./Navbar.module.css";
-const initialState = {};
+import { Container, Nav, Navbar as NavBar } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.css'
 const Navbar = (props) => {
-  const [state, setstate] = useState(initialState);
-  useEffect(() => {
-    console.log("Navbar monté");
-  }, []);
   return (
     <div className={style.Navbar} data-testid="Navbar">
-      navbar
+      <NavBar bg="primary" variant="dark">
+        <Container>
+          <NavBar.Brand href="#home">Navbar</NavBar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+        </Container>
+      </NavBar>
     </div>
   );
 };
 
-Navbar.propTypes = {};
 
 export default Navbar;
