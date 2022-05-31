@@ -24,7 +24,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <Navbar />
         <FlexLayout>
           <MemeSVGViewer image={undefined} meme={this.state.currentMeme} />
-          <MemeForm />
+          <MemeForm meme={this.state.currentMeme} />
         </FlexLayout>
         <Footer />
       </div>
