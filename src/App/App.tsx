@@ -12,6 +12,13 @@ class App extends React.Component<IAppProps,IAppState> {
     super(props);
     this.state={message:'hello',counter:0}
   }
+  componentDidMount(){
+    console.log('Composant app monté');
+  }
+  componentDidUpdate(prevProps:IAppProps,prevState:IAppState){
+    console.log('state post update=>',prevState,this.state);
+    console.log('props post update=>',prevProps,this.props);    
+  }
   render() {
     return (
       <div className="App" style={{ textAlign: "center" }}>
@@ -21,7 +28,10 @@ class App extends React.Component<IAppProps,IAppState> {
           this.setState({counter:this.state.counter-1})
           console.log(this.state.counter)
         }} bgColor="tomato">decrem -1</Button>
-        <Button bgColor="skyblue">increm +1</Button>
+        <Button action={()=>{
+          this.setState({counter:this.state.counter+1})
+          console.log(this.state.counter)
+        }} bgColor="skyblue">increm +1</Button>
       </div>
     );
   }
