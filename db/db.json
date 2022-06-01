@@ -1,0 +1,40 @@
+{
+  "memes": [
+    {
+      "id": 0,
+      "titre": "k1 pere",
+      "text": "On est tous frere on a",
+      "x": 74,
+      "y": 155,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": true,
+      "imageId": 1,
+      "color": "#bb1616"
+    }
+  ],
+  "images": [
+    {
+      "id": 0,
+      "name": "goudig",
+      "w": 500,
+      "h": 500,
+      "url": "goudigFull_500x500.jpg"
+    },
+    {
+      "id": 1,
+      "name": "quimper",
+      "w": 418,
+      "h": 348,
+      "url": "quimper_418_348.gif"
+    },
+    {
+      "id": 2,
+      "name": "tabarly",
+      "w": 655,
+      "h": 437,
+      "url": "tabarly_655x437.jpg"
+    }
+  ]
+}
