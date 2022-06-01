@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./MemeForm.module.css";
 import PropTypes from "prop-types";
-import { ACTIONS_CURRENT } from "../../../store/store";
-import { connect } from "react-redux";
+import _store, { ACTIONS_CURRENT } from "../../../store/store";
+import { connect, useDispatch } from "react-redux";
 const MemeForm = (props) => {
   return (
     <div data-testid="MemeForm" className={styles.MemeForm}>
@@ -177,18 +177,33 @@ MemeForm.propTypes = {
   images: PropTypes.array.isRequired,
 };
 export default MemeForm;
-
-function mapStateToProps(storeState,parentProps) {
+const HookConectedMemeForm = (props) => {
+  const dispatch = useDispatch();
+  return (
+    <MemeForm
+    {...props}
+      meme={_store.getState().current}
+      onMemeChange={(meme) => {
+        dispatch({type:ACTIONS_CURRENT.UPDATE_CURRENT,value:meme});
+      }}
+    />
+  );
+};
+function mapStateToProps(storeState, parentProps) {
   return {
     ...parentProps,
-    meme:storeState
-  }
+    meme: storeState.current,
+    images: storeState.ressources.images,
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    onMemeChange:(meme)=>{
-      dispatch({type:ACTIONS_CURRENT.UPDATE_CURRENT,value:meme})
-    }
-  }
+    onMemeChange: (meme) => {
+      dispatch({ type: ACTIONS_CURRENT.UPDATE_CURRENT, value: meme });
+    },
+  };
 }
-export const ConnectedMemeForm=connect(mapStateToProps,mapDispatchToProps)(MemeForm)
+export const ConnectedMemeForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MemeForm);
