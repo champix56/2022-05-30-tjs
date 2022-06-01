@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import style from "./Header.module.css";
+import { Link } from "react-router-dom";
 const initialState = {};
 const Header = (props) => {
   const [state, setstate] = useState(initialState);
@@ -9,7 +10,9 @@ const Header = (props) => {
   }, []);
   return (
     <div className={style.Header} data-testid="Header">
-      header
+      <Link to="/">Home</Link> 
+       | <Link to="/editor">New Meme</Link>
+       | <Link to="/thumbnail">thumbnail</Link>
     </div>
   );
 };
