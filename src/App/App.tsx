@@ -14,7 +14,7 @@ const App: React.FC<IAppProps> = (props) => {
       <Header />
       <Navbar />
       <FlexLayout>
-        <ConnectedMemeSVG image={undefined} />
+        <ConnectedMemeSVG/>
         <ConnectedMemeForm />
       </FlexLayout>
       <Footer />
