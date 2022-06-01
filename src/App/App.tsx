@@ -1,11 +1,14 @@
 import ConnectedMemeSVG from "./components/ui/ConnectedMemeSVGViewer/ConnectedMemeSVG";
-import React from "react";
+import React, { useEffect } from "react";
 import FlexLayout from "./components/layout/FlexLayout/FlexLayout";
 import Footer from "./components/ui/Footer/Footer";
 import Header from "./components/ui/Header/Header";
 import { ConnectedMemeForm } from "./components/ui/MemeForm/MemeForm";
 import Navbar from "./components/ui/Navbar/Navbar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams, useLocation } from "react-router-dom";
+import { MemeInterface, MemeSVGThumbnail } from "orsys-tjs-meme";
+import _store, { ACTIONS_CURRENT } from "./store/store";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 interface IAppProps {}
 
@@ -25,19 +28,37 @@ const App: React.FC<IAppProps> = (props) => {
             </div>
           }
         />
-        <Route
-          path="/editor"
-          element={
-            <FlexLayout>
-              <ConnectedMemeSVG />
-              <ConnectedMemeForm />
-            </FlexLayout>
-          }
-        />
+        <Route path="/editor" element={<MemeEditor />} />
+        <Route path="/editor/:id" element={<MemeEditor />} />
       </Routes>
-
       <Footer />
     </div>
+  );
+};
+
+const MemeEditor = (props: any) => {
+  const dispatch = useDispatch();
+  const params = useParams();
+  const memes = useSelector((state:any) => state.ressources.memes)
+  useEffect(() => {
+    console.log(memes)
+    if (undefined !== params.id) {
+      dispatch({
+        type: ACTIONS_CURRENT.UPDATE_CURRENT,
+        value: memes.find(
+            (m: MemeInterface) => m.id === Number(params.id)
+          ),
+      });
+    } else {
+      dispatch({ type: ACTIONS_CURRENT.CLEAR_CURRENT });
+    }
+  }, [params, dispatch,memes]);
+  console.log(useParams(), useLocation());
+  return (
+    <FlexLayout>
+      <ConnectedMemeSVG />
+      <ConnectedMemeForm />
+    </FlexLayout>
   );
 };
 
