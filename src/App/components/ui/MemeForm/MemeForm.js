@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./MemeForm.module.css";
 import PropTypes from "prop-types";
+import { ACTIONS_CURRENT } from "../../../store/store";
+import { connect } from "react-redux";
 const MemeForm = (props) => {
   return (
     <div data-testid="MemeForm" className={styles.MemeForm}>
@@ -175,3 +177,18 @@ MemeForm.propTypes = {
   images: PropTypes.array.isRequired,
 };
 export default MemeForm;
+
+function mapStateToProps(storeState,parentProps) {
+  return {
+    ...parentProps,
+    meme:storeState
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    onMemeChange:(meme)=>{
+      dispatch({type:ACTIONS_CURRENT.UPDATE_CURRENT,value:meme})
+    }
+  }
+}
+export const ConnectedMemeForm=connect(mapStateToProps,mapDispatchToProps)(MemeForm)

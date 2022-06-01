@@ -9,11 +9,12 @@ import React from "react";
 import FlexLayout from "./components/layout/FlexLayout/FlexLayout";
 import Footer from "./components/ui/Footer/Footer";
 import Header from "./components/ui/Header/Header";
-import MemeForm from "./components/ui/MemeForm/MemeForm";
+import MemeForm, { ConnectedMemeForm } from "./components/ui/MemeForm/MemeForm";
 import Navbar from "./components/ui/Navbar/Navbar";
+import store, { currentMemeInitialState } from './store/store'
 interface IAppState {
-  currentMeme: MemeInterface;
   images: Array<ImageInterface>;
+  memes: Array<MemeInterface>;
 }
 interface IAppProps {}
 
@@ -26,7 +27,29 @@ const images: Array<ImageInterface> = [
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
-    this.state = { currentMeme: emptyMeme, images: images };
+    this.state = { images: [], memes: [] };
+    console.log(store);
+    
+  }
+  componentDidMount() {
+
+    const timgs = fetch("http://localhost:5679/images").then((f) => f.json());
+
+    const tmemes = fetch("http://localhost:5679/memes").then((f) => f.json());
+
+    const tAll = Promise.all([timgs, tmemes]);
+
+    const tout = new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+    Promise.race([tAll, tout]).then((arr_arr) => {
+      if (!Array.isArray(arr_arr)) {
+        console.log("timeOut declenché");
+        return;
+      }
+      console.log(arr_arr);
+      this.setState({ memes: arr_arr[1], images: arr_arr[0] });
+    });
   }
   render() {
     return (
@@ -34,15 +57,15 @@ class App extends React.Component<IAppProps, IAppState> {
         <Header />
         <Navbar />
         <FlexLayout>
-          <MemeSVGViewer image={
-            this.state.images.find(e=>e.id===this.state.currentMeme.imageId)
-          } meme={this.state.currentMeme} basePath='/media/' />
-          <MemeForm 
-            meme={this.state.currentMeme}
+          <MemeSVGViewer
+            image={this.state.images.find(
+              (e) => e.id === -1
+            )}
+            meme={emptyMeme}
+            basePath="/media/"
+          />
+          <ConnectedMemeForm
             images={this.state.images}
-            onMemeChange={(meme: MemeInterface) => {
-              this.setState({ currentMeme: meme });
-            }}
           />
         </FlexLayout>
         <Footer />
