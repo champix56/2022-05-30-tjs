@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MemeForm.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 const MemeForm = (props) => {
   return (
     <div data-testid="MemeForm" className={styles.MemeForm}>
@@ -18,8 +18,21 @@ const MemeForm = (props) => {
         />
         <hr />
         <h2>Image</h2>
-        <select>
+        <select
+          value={props.meme.imageId}
+          onChange={(evt) => {
+            props.onMemeChange({
+              ...props.meme,
+              imageId: Number(evt.target.value),
+            });
+          }}
+        >
           <option value="-1">Aucune</option>
+          {props.images.map((e, i) => (
+            <option value={e.id} key={"select-option-" + i}>
+              {e.name}
+            </option>
+          ))}
         </select>
         <hr />
         <h2>text</h2>
@@ -156,8 +169,9 @@ const MemeForm = (props) => {
     </div>
   );
 };
-MemeForm.propTypes={
+MemeForm.propTypes = {
   onMemeChange: PropTypes.func.isRequired,
-  meme: PropTypes.object.isRequired
-}
+  meme: PropTypes.object.isRequired,
+  images: PropTypes.array.isRequired,
+};
 export default MemeForm;
